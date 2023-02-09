@@ -1,0 +1,62 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class LogInAttempt {
+	public String valid(int index,String[]pWord,String triedPassWord)
+	{
+		if(index>=pWord.length)
+		{
+			return triedPassWord;
+		}
+		
+		if(!triedPassWord.contains(pWord[index]))
+		{
+			return triedPassWord="Wrong Password.";
+		}
+		int location=triedPassWord.indexOf(pWord[index]);
+		if(location!=0)
+			triedPassWord=triedPassWord.substring(0,location)+" "+triedPassWord.substring(location,triedPassWord.length());
+		//
+		while(triedPassWord.substring(location+2,triedPassWord.length()).contains(pWord[index])==true)
+		{
+			
+			int len=triedPassWord.substring(0,location+2).length();
+			location=triedPassWord.substring(location+2,triedPassWord.length()).indexOf(pWord[index]);
+			location+=len;
+			triedPassWord=triedPassWord.substring(0,location)+" "+triedPassWord.substring(location,triedPassWord.length());
+			
+			
+		}
+		triedPassWord=valid(index+1,pWord,triedPassWord);
+		return triedPassWord;
+		
+	}
+	public String[] passwords(int numOfPasswords)
+	{
+		String [] pWord=new String[numOfPasswords];
+		for(int i=0;i<pWord.length;i++)
+		{
+			Scanner sc= new Scanner(System.in);
+			pWord[i]=sc.next();
+		}
+		return pWord;
+	}
+	public void passwordCheck() 
+	{
+		Scanner sc= new Scanner(System.in);
+		int ttlnum=sc.nextInt();
+		for(int i=0;i<ttlnum;i++)
+		{
+			int numOfPasswords=sc.nextInt();
+			String[] pWord=passwords(numOfPasswords);
+			String triedPassWord=sc.next();
+			String res=valid(0,pWord,triedPassWord);
+			System.out.println(res.trim());
+		}
+	}
+	public static void main(String[]args)
+	{
+		LogInAttempt lia=new LogInAttempt();
+		lia.passwordCheck();
+	}
+}
