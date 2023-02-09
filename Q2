@@ -1,0 +1,53 @@
+import java.util.Arrays;
+
+public class StringOrder {
+	public void sort(String []inputArr)
+	{
+		for(int i=0;i<inputArr.length-1;i++)
+		{
+			int small=i;
+			for(int j=i+1;j<inputArr.length;j++)
+			{
+				if(inputArr[small].charAt(0)>inputArr[j].charAt(0))
+				{
+					small=j;
+				}
+			}
+			String temp=inputArr[i];
+			inputArr[i]=inputArr[small];
+			inputArr[small]=temp;
+		}
+	}
+	public void result(String [] input)
+	{
+		String[] inputClone=input.clone();
+		sort(inputClone);
+		System.out.println(Arrays.toString(input));
+		int halfLength=input.length/2;
+		for(int i=0;i<inputClone.length;i++)
+		{
+			int j;
+			for(j=0;j<halfLength;j++)
+			{
+				if(inputClone[i].compareTo(input[j])==0)
+				{
+					break;
+				}
+			}
+			if(j!=halfLength)
+			{
+				System.out.print("-");
+			}
+			else
+			{
+				System.out.print(inputClone[i].substring(2,inputClone[i].length())+" ");
+			}
+		}
+	}
+	public static void main(String[]args)
+	{
+		String[] input= {"0 ab","6 cd","0 ef","6 gh","4 ij","0 ab","6 cd","0 ef","6gh","0 ij","4 that","3 be","0 to","1 be","5 question","1 or","2 not","4 is","2 to","4 the"};
+		StringOrder so=new StringOrder();
+		so.result(input);
+	}
+}
