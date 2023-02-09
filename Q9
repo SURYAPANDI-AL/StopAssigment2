@@ -1,0 +1,43 @@
+import java.util.Arrays;
+import java.util.Scanner;
+public class Pattern {
+	public void print(int input) {
+		int patternMatrix[][]=new int[input][input];
+		int top=0,left=0,right=input,bottom=input;
+
+		while(top<bottom&&left<right)
+		{
+			for(int i=left;i<right;i++)
+			{
+				patternMatrix[left][i]=1;
+			}
+			top++;
+			for(int i=top;i<bottom;i++)
+			{
+				patternMatrix[i][right-1]=1;
+			}
+			right--;
+			for(int i=right;i>=left;i--)
+			{
+				patternMatrix[right][i]=1;
+			}
+			bottom--;
+			for(int i=bottom;i>=top;i--)
+			{
+				patternMatrix[i][left]=1;
+			}
+			left++;
+			top++;left++;right--;bottom--;
+		}
+		for(int[] a:patternMatrix)
+		{
+			System.out.println(Arrays.toString(a));
+		}
+	}
+	public static void main(String [] args) {
+		Scanner sc=new Scanner(System.in);
+		int value=sc.nextInt();
+		Pattern p=new Pattern();
+		p.print(value);
+	}
+}
