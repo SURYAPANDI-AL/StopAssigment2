@@ -1,0 +1,61 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class RotateMatrix {
+
+	public void transpose(int [][] nums)
+	{
+		for(int i=0;i<nums.length;i++)
+		{
+			for(int j=i;j<nums.length;j++)
+			{
+				nums[i][j]=nums[j][i]+nums[i][j]-(nums[j][i]=nums[i][j]);
+			}
+		}
+	}
+
+	public void reverse(int [][] nums)
+	{
+		for(int i=0;i<nums.length;i++)
+		{
+			for(int j=0;j<nums.length/2;j++)
+			{
+				nums[i][j]=nums[i][nums.length-1-j]+nums[i][j]-(nums[i][nums.length-1-j]=nums[i][j]);
+			}
+		}
+	}
+
+	public void print(int [][] nums)
+	{
+		for(int[]i:nums)
+			System.out.println(Arrays.toString(i));
+	}
+
+	public void rotate(int [][] nums,int n)
+	{
+		for(int i=0;i<n;i++)
+		{
+			transpose(nums);
+			reverse(nums);
+		}
+	}	
+	
+	public static void main(String[]args)
+	{
+		Scanner sc = new Scanner(System.in);
+		int N=sc.nextInt();
+		int[][] matrix=new int[N][N];
+		//elements of matrix
+		for(int  i=0;i<N;i++)
+		{
+			for(int j=0;j<N;j++)
+			{
+				matrix[i][j]=sc.nextInt();
+			}
+		}
+		//number of rotatioins
+		int rotations=sc.nextInt();
+		RotateMatrix rm=new RotateMatrix();
+		rm.rotate(matrix,rotations);
+	}
+}
