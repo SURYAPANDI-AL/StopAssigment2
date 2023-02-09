@@ -1,0 +1,22 @@
+import java.util.*;
+public class SubSet {
+		public void subsets(int index,int []nums,List<Integer> list) {
+			if(index>=nums.length)
+			{
+				System.out.print(list);
+				return;
+			}
+			list.add(nums[index]);
+			subsets(index+1,nums,list);
+			list.remove(list.size()-1);
+			subsets(index+1,nums,list);
+		}
+		public static void main(String[]args)
+		{
+			int []nums= {1,2,3};
+			List <Integer> list=new LinkedList();
+			SubSet ss=new SubSet();
+			ss.subsets(0,nums,list);
+	
+		}
+}
