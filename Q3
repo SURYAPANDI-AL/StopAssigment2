@@ -1,0 +1,51 @@
+
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class BankSecurity {
+		public int count(int [] expenditure,int d) {
+			if(expenditure.length<=d)
+				return 0;
+			Set <Integer> expense=new TreeSet();
+			int alert=0;
+			for(int i=0;i<d;i++)
+			{
+				expense.add(expenditure[i]);
+			}
+			int median=expense.size()/2;
+			int medianVal=0;
+			for(Integer i:expense) {
+				if(median==0)
+				{
+					medianVal=i;
+					break;
+				}
+				median--;
+				
+			}
+			medianVal*=2;
+			for(int i=d;i<expenditure.length;i++)
+			{
+				if(medianVal<=expenditure[i])
+				{
+					alert++;
+				}
+			}
+			return alert;
+		}
+		public static void main (String [] args)
+		{
+			Scanner sc=new Scanner(System.in);
+			
+			int n=sc.nextInt();
+			int d=sc.nextInt();
+			int expenditure[]=new int[n];
+			for(int i=0;i<n;i++)
+			{
+				expenditure[i]=sc.nextInt();
+			}
+			BankSecurity bs=new BankSecurity();
+			System.out.println(bs.count(expenditure,d));
+		}
+}
